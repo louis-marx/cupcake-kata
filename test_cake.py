@@ -3,16 +3,18 @@ Start with the first test and make it pass, then move to the next one.
 Run: uv run pytest
 """
 
-from cake import Cupcake
+from cake import Cake, Cupcake
 
 
 # Basic cake functionality
 def test_cupcake_name():
     cupcake = Cupcake()
+    assert isinstance(cupcake, Cake)
     assert cupcake.name() == "🧁"
 
 # def test_cookie_name():
 #     cookie = Cookie()
+#     assert isinstance(cookie, Cake)
 #     assert cookie.name() == "🍪"
 
 # def test_cupcake_price():
@@ -27,6 +29,7 @@ def test_cupcake_name():
 # # Single toppings
 # def test_cupcake_with_chocolate_name():
 #     cake = Chocolate(Cupcake())
+#     assert isinstance(cake, Cake)
 #     assert cake.name() == "🧁 with 🍫"
 
 # def test_cookie_with_chocolate_name():
@@ -65,6 +68,7 @@ def test_cupcake_name():
 # def test_bundle_with_single_cupcake():
 #     cupcake = Cupcake()
 #     bundle = Bundle([cupcake])
+#     assert isinstance(bundle, Cake)
 #     assert bundle.price() == 0.9  # 1.0 * 0.9
 
 # def test_bundle_with_cupcake_and_cookie():
