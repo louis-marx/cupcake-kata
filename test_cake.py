@@ -3,7 +3,7 @@ Start with the first test and make it pass, then move to the next one.
 Run: uv run pytest
 """
 
-from cake import Cake, Cupcake, Cookie, Chocolate
+from cake import Cake, Cupcake, Cookie, Chocolate, Nuts, Sugar
 
 
 # Basic cake functionality
@@ -45,23 +45,23 @@ def test_cookie_with_chocolate_price():
     assert cake.price() == 2.1
 
 
-# # Multiple toppings
-# def test_cookie_with_chocolate_and_nuts_name():
-#     cake = Nuts(Chocolate(Cookie()))
-#     assert cake.name() == "🍪 with 🍫 and 🥜"
+# Multiple toppings
+def test_cookie_with_chocolate_and_nuts_name():
+    cake = Nuts(Chocolate(Cookie()))
+    assert cake.name() == "🍪 with 🍫 and 🥜"
 
-# def test_cookie_with_nuts_and_chocolate_name():
-#     cake = Chocolate(Nuts(Cookie()))
-#     assert cake.name() == "🍪 with 🥜 and 🍫"
+def test_cookie_with_nuts_and_chocolate_name():
+    cake = Chocolate(Nuts(Cookie()))
+    assert cake.name() == "🍪 with 🥜 and 🍫"
 
-# def test_cookie_with_chocolate_and_nuts_price():
-#     cake = Nuts(Chocolate(Cookie()))
-#     assert cake.price() == 2.2
+def test_cookie_with_chocolate_and_nuts_price():
+    cake = Nuts(Chocolate(Cookie()))
+    assert cake.price() == 2.2
 
-# def test_complex_cake_with_all_toppings():
-#     cake = Sugar(Nuts(Chocolate(Cupcake())))
-#     assert cake.name() == "🧁 with 🍫 and 🥜 and 🍬"
-#     assert cake.price() == 1.3
+def test_complex_cake_with_all_toppings():
+    cake = Sugar(Nuts(Chocolate(Cupcake())))
+    assert cake.name() == "🧁 with 🍫 and 🥜 and 🍬"
+    assert cake.price() == 1.3
 
 
 # # Bundles

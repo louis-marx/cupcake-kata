@@ -54,14 +54,32 @@ class ToppingDecorator(Cake):
     topping_price: float
 
     def name(self):
-        return f"{self.cake.name()} with {self.topping_emoji}"
+        base_name = self.cake.name()
+        if isinstance(self.cake, ToppingDecorator):
+            return f"{base_name} and {self.topping_emoji}"
+        else:
+            return f"{base_name} with {self.topping_emoji}"
 
     def price(self):
-        return self.cake.price() + self.topping_price
+        return round(self.cake.price() + self.topping_price, 2)
 
 
 @dataclass
 class Chocolate(ToppingDecorator):
     """Chocolate topping decorator"""
     topping_emoji: str = "🍫"
+    topping_price: float = 0.1
+
+
+@dataclass
+class Nuts(ToppingDecorator):
+    """Nuts topping decorator"""
+    topping_emoji: str = "🥜"
+    topping_price: float = 0.1
+
+
+@dataclass
+class Sugar(ToppingDecorator):
+    """Sugar topping decorator"""
+    topping_emoji: str = "🍬"
     topping_price: float = 0.1
