@@ -1,7 +1,9 @@
 [project]
 name = "cupcake-kata"
 version = "0.1.0"
-description = "Add your description here"
+description = "A kata for practicing Decorator and Composite design patterns with cupcakes"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "pytest>=7.0.0",
+]
