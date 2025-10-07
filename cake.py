@@ -6,17 +6,20 @@ Use the Decorator and Composite design patterns.
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
+TOPPING_PRICE = 0.1
+BUNDLE_DISCOUNT = 0.9
+
 
 class Cake(ABC):
     """Base interface for all cakes"""
 
     @abstractmethod
     def name(self):
-        pass
+        return None
 
     @abstractmethod
     def price(self):
-        pass
+        return None
 
 
 @dataclass
@@ -51,7 +54,7 @@ class ToppingDecorator(Cake):
     """Base decorator class for cake toppings"""
     cake: Cake
     topping_emoji: str
-    topping_price: float
+    topping_price: float = TOPPING_PRICE
 
     def name(self):
         base_name = self.cake.name()
@@ -68,18 +71,35 @@ class ToppingDecorator(Cake):
 class Chocolate(ToppingDecorator):
     """Chocolate topping decorator"""
     topping_emoji: str = "🍫"
-    topping_price: float = 0.1
 
 
 @dataclass
 class Nuts(ToppingDecorator):
     """Nuts topping decorator"""
     topping_emoji: str = "🥜"
-    topping_price: float = 0.1
 
 
 @dataclass
 class Sugar(ToppingDecorator):
     """Sugar topping decorator"""
     topping_emoji: str = "🍬"
-    topping_price: float = 0.1
+
+
+@dataclass
+class Bundle(Cake):
+    """Bundle of cakes with discount"""
+    cakes: list[Cake]
+
+    def name(self):
+        if len(self.cakes) == 1:
+            return self.cakes[0].name()
+        return "\n".join(cake.name() for cake in self.cakes)
+
+    def price(self):
+        total_price = 0
+        for cake in self.cakes:
+            if isinstance(cake, Bundle):
+                total_price += sum(nested_cake.price() for nested_cake in cake.cakes)
+            else:
+                total_price += cake.price()
+        return round(total_price * BUNDLE_DISCOUNT, 2)

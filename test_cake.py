@@ -3,7 +3,7 @@ Start with the first test and make it pass, then move to the next one.
 Run: uv run pytest
 """
 
-from cake import Cake, Cupcake, Cookie, Chocolate, Nuts, Sugar
+from cake import Cake, Cupcake, Cookie, Chocolate, Nuts, Sugar, Bundle
 
 
 # Basic cake functionality
@@ -64,47 +64,47 @@ def test_complex_cake_with_all_toppings():
     assert cake.price() == 1.3
 
 
-# # Bundles
-# def test_bundle_with_single_cupcake():
-#     cupcake = Cupcake()
-#     bundle = Bundle([cupcake])
-#     assert isinstance(bundle, Cake)
-#     assert bundle.name() == "🧁"
-#     assert bundle.price() == 0.9  # 1.0 * 0.9
+# Bundles
+def test_bundle_with_single_cupcake():
+    cupcake = Cupcake()
+    bundle = Bundle([cupcake])
+    assert isinstance(bundle, Cake)
+    assert bundle.name() == "🧁"
+    assert bundle.price() == 0.9  # 1.0 * 0.9
 
-# def test_bundle_with_cupcake_and_cookie():
-#     cupcake = Cupcake()
-#     cookie = Cookie()
-#     bundle = Bundle([cupcake, cookie])
-#     assert bundle.name() == "🧁\n🍪"
-#     assert bundle.price() == 2.7  # (1.0 + 2.0) * 0.9
+def test_bundle_with_cupcake_and_cookie():
+    cupcake = Cupcake()
+    cookie = Cookie()
+    bundle = Bundle([cupcake, cookie])
+    assert bundle.name() == "🧁\n🍪"
+    assert bundle.price() == 2.7  # (1.0 + 2.0) * 0.9
 
-# def test_bundle_with_decorated_cakes():
-#     decorated_cupcake = Chocolate(Cupcake())
-#     decorated_cookie = Nuts(Cookie())
-#     bundle = Bundle([decorated_cupcake, decorated_cookie])
-#     assert bundle.name() == "🧁 with 🍫\n🍪 with 🥜"
-#     assert bundle.price() == 2.88  # (1.1 + 2.1) * 0.9
+def test_bundle_with_decorated_cakes():
+    decorated_cupcake = Chocolate(Cupcake())
+    decorated_cookie = Nuts(Cookie())
+    bundle = Bundle([decorated_cupcake, decorated_cookie])
+    assert bundle.name() == "🧁 with 🍫\n🍪 with 🥜"
+    assert bundle.price() == 2.88  # (1.1 + 2.1) * 0.9
 
-# def test_nested_bundles():
-#     cupcake1 = Cupcake()
-#     cupcake2 = Cupcake()
-#     inner_bundle = Bundle([cupcake1, cupcake2])
+def test_nested_bundles():
+    cupcake1 = Cupcake()
+    cupcake2 = Cupcake()
+    inner_bundle = Bundle([cupcake1, cupcake2])
 
-#     cookie = Cookie()
-#     outer_bundle = Bundle([inner_bundle, cookie])
-#     assert outer_bundle.name() == "🧁\n🧁\n🍪"
-#     assert outer_bundle.price() == 3.6  # (1 + 1 + 2.0) * 0.9
+    cookie = Cookie()
+    outer_bundle = Bundle([inner_bundle, cookie])
+    assert outer_bundle.name() == "🧁\n🧁\n🍪"
+    assert outer_bundle.price() == 3.6  # (1 + 1 + 2.0) * 0.9
 
 
-# # Integration test
-# def test_complex_scenario():
-#     fancy_cupcake = Sugar(Nuts(Chocolate(Cupcake())))
-#     simple_cookie = Chocolate(Cookie())
-#     plain_cupcake = Cupcake()
+# Integration test
+def test_complex_scenario():
+    fancy_cupcake = Sugar(Nuts(Chocolate(Cupcake())))
+    simple_cookie = Chocolate(Cookie())
+    plain_cupcake = Cupcake()
 
-#     cake_bundle = Bundle([fancy_cupcake, simple_cookie])
-#     mega_bundle = Bundle([cake_bundle, plain_cupcake])
+    cake_bundle = Bundle([fancy_cupcake, simple_cookie])
+    mega_bundle = Bundle([cake_bundle, plain_cupcake])
 
-#     assert mega_bundle.name() == "🧁 with 🍫 and 🥜 and 🍬\n🍪 with 🍫\n🧁"
-#     assert mega_bundle.price() == 3.96  # (1.3 + 2.1 + 1.0) * 0.9
+    assert mega_bundle.name() == "🧁 with 🍫 and 🥜 and 🍬\n🍪 with 🍫\n🧁"
+    assert mega_bundle.price() == 3.96  # (1.3 + 2.1 + 1.0) * 0.9
