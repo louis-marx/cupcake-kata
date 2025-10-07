@@ -3,7 +3,7 @@ Start with the first test and make it pass, then move to the next one.
 Run: uv run pytest
 """
 
-from cake import Cake, Cupcake
+from cake import Cake, Cupcake, Cookie
 
 
 # Basic cake functionality
@@ -12,18 +12,18 @@ def test_cupcake_name():
     assert isinstance(cupcake, Cake)
     assert cupcake.name() == "🧁"
 
-# def test_cookie_name():
-#     cookie = Cookie()
-#     assert isinstance(cookie, Cake)
-#     assert cookie.name() == "🍪"
+def test_cookie_name():
+    cookie = Cookie()
+    assert isinstance(cookie, Cake)
+    assert cookie.name() == "🍪"
 
-# def test_cupcake_price():
-#     cupcake = Cupcake()
-#     assert cupcake.price() == 1.0
+def test_cupcake_price():
+    cupcake = Cupcake()
+    assert cupcake.price() == 1.0
 
-# def test_cookie_price():
-#     cookie = Cookie()
-#     assert cookie.price() == 2.0
+def test_cookie_price():
+    cookie = Cookie()
+    assert cookie.price() == 2.0
 
 
 # # Single toppings

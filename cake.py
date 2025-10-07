@@ -4,6 +4,7 @@ Use the Decorator and Composite design patterns.
 """
 
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 
 
 class Cake(ABC):
@@ -18,11 +19,28 @@ class Cake(ABC):
         pass
 
 
-class Cupcake(Cake):
-    """A cupcake implementation"""
+@dataclass
+class BaseCake(Cake):
+    """Base class for concrete cake types"""
+    emoji: str
+    base_price: float
 
     def name(self):
-        return None
+        return self.emoji
 
     def price(self):
-        return None
+        return self.base_price
+
+
+@dataclass
+class Cupcake(BaseCake):
+    """A cupcake implementation"""
+    emoji: str = "🧁"
+    base_price: float = 1.0
+
+
+@dataclass
+class Cookie(BaseCake):
+    """A cookie implementation"""
+    emoji: str = "🍪"
+    base_price: float = 2.0
