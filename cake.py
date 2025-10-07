@@ -44,3 +44,24 @@ class Cookie(BaseCake):
     """A cookie implementation"""
     emoji: str = "🍪"
     base_price: float = 2.0
+
+
+@dataclass
+class ToppingDecorator(Cake):
+    """Base decorator class for cake toppings"""
+    cake: Cake
+    topping_emoji: str
+    topping_price: float
+
+    def name(self):
+        return f"{self.cake.name()} with {self.topping_emoji}"
+
+    def price(self):
+        return self.cake.price() + self.topping_price
+
+
+@dataclass
+class Chocolate(ToppingDecorator):
+    """Chocolate topping decorator"""
+    topping_emoji: str = "🍫"
+    topping_price: float = 0.1
